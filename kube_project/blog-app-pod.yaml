@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blog-app-pod
+  labels:
+    name: blog-app-pod
+    app: blog-app
+spec:
+  containers:
+    - name: blog-app
+      image: cmpe220/my-blog-app:v16
+      ports:
+        - containerPort: 8000
+      env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "postgres"
+        - name: POSTGRES_HOST
+          value: postgres-service
