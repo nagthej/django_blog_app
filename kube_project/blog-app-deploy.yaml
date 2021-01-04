@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app-deploy
+  labels:
+    name: blog-app-deploy
+    app: blog-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: blog-app-pod
+      app: blog-app
+
+  template:
+    metadata:
+      name: blog-app-pod
+      labels:
+        name: blog-app-pod
+        app: blog-app
+    spec:
+      containers:
+        - name: blog-app
+          image: cmpe220/my-blog-app:v16
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_HOST
+              value: postgres-service
